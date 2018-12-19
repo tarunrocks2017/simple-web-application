@@ -1,0 +1,32 @@
+body{
+    overflow-x: hidden;
+}
+.container{
+    width:100vw;
+    height:100px;
+    border:1px solid black;
+}
+.Home-page-content{
+    width:100vw ;
+    height:60vh;
+    border:1px solid black;
+    position: relative;
+}
+footer{
+    height:40vh;
+    width:100vw;
+    border:1px solid black;
+}
+img{
+    width:100%;
+    height:100%;
+}
+.about-website{
+    position:absolute;
+    right:0;
+    height:100%;
+    width:40%;
+    border:1px solid black;
+    padding:6%;
+    color:black;
+}

@@ -1,0 +1,14 @@
+.movie-info-container::slotted{
+  height:300px;
+  width:30%;
+  border:1px solid black;
+  margin:10px;
+}
+.movie-image-container{
+  height:50%;
+  width:100%;
+}
+img{
+  width:100%;
+  height:100%;
+}

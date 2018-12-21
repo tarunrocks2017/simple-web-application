@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box;
+    color:grey;
+    font-style: italic;
+}
+.movie-caste-info{
+    padding:20px ;
+}
+.movie-image-content{
+    height:80%;
+}
+.movie-all-info{
+    padding:20px;
+    height:500px;
+}
+.movie-basic-info{
+    height:50%;
+}
+ul{
+    height:80%;
+}
+img{
+    width:100%;
+    height:100%;
+}

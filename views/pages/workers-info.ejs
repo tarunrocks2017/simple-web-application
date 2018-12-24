@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <% include ../partials/head %> 
+        <link rel="stylesheet" href="/movie-info.css">
+</head>
+<body>
+        <header><% include ../partials/header %></header>
+
+                <div class="container d-flex" style="height:700px">
+                    <div class="w-50 h-100">
+                        <div class="w-100 h-50 p-2">
+                            <img src=<%=workerObj[0].image_url%> alt="Actor-image">
+                        </div>
+                        <div class="w-100 h-50 p-2">
+                            <ul class="list-group">
+                                <li class="list-group-item">Name : <%=workerObj[0].actorname%></li>
+                                <li class="list-group-item">ActiveYear : <%=workerObj[0].activeyear%></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="w-100 h-100">
+                        <div class="w-100 m-4">
+                            <h5><span class="badge badge-secondary">Popular-movies :</span></h5>
+                       <ul class="list-group">
+                           <% workerObj.forEach(element => {%>
+                                <a href=/movies/<%=element.movieid%>>
+                                    <li class="list-group-item"><%=element.moviename%></li>
+                                </a>
+                                <%})%>
+                        </ul>
+                        <h5><span class="badge badge-secondary">Awards :</span></h5>
+                        <ul class="list-group">
+                                    <li class="list-group-item"><%=workerObj[0].awards%></li>
+                        </ul>
+                    </div>
+                        <div class="w-100 h-50 pl-4 font-italic text-justify text-secondary">
+                           <p class="m-2"><%=workerObj[0].description%></p>
+                        </div>
+                    </div>
+                    
+                       
+                    </div>
+    
+</body>
+<footer><% include ../partials/footer %></footer>
+</html>

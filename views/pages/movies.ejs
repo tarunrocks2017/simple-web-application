@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %> 
+   <link rel="stylesheet" href="/movies.css" type="text/css">
+</head>
+<body>
+    <header><% include ../partials/header %></header>
+    <div class="container-fluid d-flex" style="height:1000px;flex-wrap:wrap; border:1px solid black">
+
+        <% movieInfo.forEach(element =>{ %>
+            <div class="w-25 h-50 m-4">
+                <div class="w-100 h-50">
+                    <img class="w-100 h-100" src=<%= element.image_url%> alt="">
+                </div>
+                <div class="basic-info w-100 h-50">
+                <ul class="list-group">
+                    <li class="list-group-item"><%= element.name%></li>
+                   <a class="btn btn-primary" href=/movies/<%=element.movieid%>> <li class="list-group-item text-primary">More_info</li></a>
+                </ul>
+            </div>
+            </div>
+
+        <% }); %>
+    </div>
+</body>
+<footer><% include ../partials/footer %></footer>
+</html>

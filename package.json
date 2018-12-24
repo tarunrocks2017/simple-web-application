@@ -6,8 +6,12 @@
   "scripts": {
     "lint": "eslint *.js",
     "test": "nyc mocha  test-file.js & esw -w test-file.js",
+    "sqlTest": "nyc mocha SqlFiles/sql-test-file.js & esw -w SqlFiles/sql-test-file.js",
     "lint-test": "npm run lint & npm test",
-    "start": "nodemon *.js "
+    "start": "nodemon index.js",
+    "createDataBase": "node SqlFiles/createDataBase.js",
+    "connect": "node SqlFiles/Connection.js",
+    "createTable": "node SqlFiles/createtable.js"
   },
   "author": "me",
   "license": "ISC",
@@ -19,12 +23,18 @@
     "eslint-watch": "^4.0.2",
     "mocha": "^5.2.0",
     "morgan": "^1.9.1",
+    "mysql-promise": "^5.0.0",
     "nodemon": "^1.18.9",
     "nyc": "^13.1.0",
     "winston": "^3.1.0"
   },
   "dependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "mysql2": "^1.6.4",
+    "promise-mysql": "^3.3.1"
   }
 }

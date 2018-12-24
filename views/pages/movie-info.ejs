@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <% include ../partials/head %> 
+        <link rel="stylesheet" href="/movie-info.css">
+</head>
+<body>
+        <header><% include ../partials/header %></header>
+
+                <div class="container d-flex" style="height:700px">
+                    <div class="w-50 h-100">
+                        <div class="w-100 h-50 p-2">
+                            <img src=<%=obj[0].image_url%> alt="movie-image">
+                        </div>
+                        <div class="w-100 h-50 p-2">
+                            <ul class="list-group">
+                                <li class="list-group-item">released on : <%=obj[0].releaseYear%></li>
+                                <li class="list-group-item">BoxOffice-status : <%=obj[0].status%></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="w-100 h-100">
+                        <div class="w-100 m-4">
+                                <h3><span class="badge badge-secondary">Movie-caste :</span></h3>
+                            <ul class="list-group">
+                                <% obj.forEach(element => { %>
+                                    <a href='/workers/<%=element.actorid%>'>
+                                        <li class="list-group-item"><%=element.actorname%></li>
+                                    </a>
+                                <%});%>
+                            </ul>
+                        </div>
+                        <div class="w-100 h-50 p-4 font-italic text-justify text-secondary">
+                            <%=obj[0].description%>
+                        </div>
+                    </div>
+                    
+                       
+                    </div>
+    
+</body>
+<footer><% include ../partials/footer %></footer>
+</html>

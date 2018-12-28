@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.js",
-    "test": "nyc mocha  test-file.js & esw -w test-file.js",
-    "sqlTest": "nyc mocha SqlFiles/sql-test-file.js & esw -w SqlFiles/sql-test-file.js",
-    "lint-test": "npm run lint & npm test",
-    "start": "nodemon index.js",
+    "watch-lint": "npm run lint & esw -w *.js",
+    "test": "DB_NAME=testDB nyc mocha  testCases/*.js & esw -w testCases/*.js",
+    "lint-test": "npm run lint & npm test & esw -w testCases/*.js",
+    "start": "npm run lint-test & nodemon index.js",
     "createDataBase": "node SqlFiles/createDataBase.js",
     "connect": "node SqlFiles/Connection.js",
     "createTable": "node SqlFiles/createtable.js"
@@ -26,15 +26,26 @@
     "mysql-promise": "^5.0.0",
     "nodemon": "^1.18.9",
     "nyc": "^13.1.0",
+    "supertest": "^3.3.0",
     "winston": "^3.1.0"
   },
   "dependencies": {
+    "bcrypt": "^3.0.3",
+    "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "dotenv": "^6.2.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
     "mocha": "^5.2.0",
+    "mongodb": "^3.1.10",
+    "mongoose": "^5.4.0",
     "mysql2": "^1.6.4",
-    "promise-mysql": "^3.3.1"
+    "promise-mysql": "^3.3.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "should": "^13.2.3",
+    "supertest": "^3.3.0"
   }
 }

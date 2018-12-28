@@ -1,71 +1,56 @@
 const express = require('express');
 
+const bodyparser = require('body-parser');
+
 const path = require('path');
 
 require('dotenv').config();
 
-const logger = require('./config/winston.js');
+const session = require('express-session');
 
-const fileName = path.basename('/home/tarun/Documents/MountBlueProjects/06-web-application/views/public');
+const movieRoutes = require('./source/movies/movieRoute');
+const actorRoutes = require('./source/actors/actorRoute');
+const RegisterRoute = require('./source/User/Registration/RegistraionRoute');
+const RegistrationPage = require('./source/User/Registration/Registrationpage');
+const Loginpage = require('./source/User/userLogin/loginpageRoute');
+const LoginRoute = require('./source/User/userLogin/LoginRoute');
+const logoutRoute = require('./source/User/userLogout/logoutroute');
+const middlewareFunction = require('./middlewareFunctions/middleWare');
 
-const data = require('./Service');
-
+const fileName = path.basename(`${__dirname}/views/public`);
 const app = express();
 
+
+app.use(bodyparser.urlencoded({ extended: false }));
+
+app.use(middlewareFunction.middleware);
+
+app.use(session({
+  secret: 'email',
+  resave: false,
+  saveUninitialized: false,
+}));
 
 app.set('view engine', 'ejs');
 
 app.use(express.static(`${fileName}/images`));
 app.use(express.static(`${fileName}/css-files`));
 
-const middleware = (req, res, next) => {
-  logger.log('info', `${req.url} requested`);
-  next();
-};
+app.use('/workers', actorRoutes);
+app.use('/movies', movieRoutes);
+app.use('/Login', Loginpage);
+app.use('/UserRegistration', RegisterRoute);
+app.use('/UserLogin', LoginRoute);
+app.use('/Register', RegistrationPage);
+app.use('/Logout', logoutRoute);
 
-app.get('/Home', middleware, (req, res) => {
-  res.render('pages/Home');
+app.get('/', (req, res) => {
+  res.render('pages/Home', { isActive: req.session.isActive });
 });
 
-app.get('/Actors', (req, res) => {
-  res.render('pages/Actors');
-});
-
-
-app.get('/movies', async (req, res) => {
-  const movieInfo = await data.getMovies();
-  res.render('pages/movies', { movieInfo });
-});
-
-app.get('/movies/:id', async (req, res) => {
-  try {
-    const obj = await data.getMovieById(req.params.id);
-    if (obj.length === 0) res.status(500).render('pages/error', { msg: '500 id not found' });
-    res.render('pages/movie-info', { obj });
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
-
-app.get('/workers', async (req, res) => {
-  try {
-    const ActorInformation = await data.getActors();
-    res.render('pages/workers', { ActorInformation });
-  } catch (error) {
-    res.status(400).render('pages/error');
-  }
-});
-
-app.get('/workers/:id', async (req, res) => {
-  const workerObj = await data.getActorById(req.params.id);
-  if (workerObj.length === 0) res.render('pages/error', { msg: '500 id not found' });
-  else res.render('pages/workers-info', { workerObj });
-});
-
-app.get('*', middleware, (req, res) => {
-  res.status(400).render('pages/error', { msg: '404 page not found . think you are sending wrong request' });
+app.get('*', (req, res) => {
+  res.status(404).render('pages/error', { msg: '404 page not found . think you are sending wrong request' });
 });
 
 app.listen(8080, () => {
-  logger.log('info', 'requested');
 });

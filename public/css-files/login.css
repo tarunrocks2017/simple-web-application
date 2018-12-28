@@ -1,0 +1,9 @@
+.login-container{
+    height:60vh;
+    width:50%;
+    border:1px solid black;
+    margin-top:15vh;
+}
+form{
+    flex-wrap: wrap;
+}
